@@ -1,0 +1,27 @@
+### ~/.tcshrc
+
+setenv EDITOR vim
+setenv PAGER less
+setenv CLICOLOR true
+setenv SCLICOLOR true
+setenv LSCOLORS GxFxCxDxBxegedabagaced
+
+set history = 200
+set savehist = 800 merge
+set filec
+set notify
+set noclobber
+set nomatch
+set echo_style both
+set addsuffix
+set ampm
+set autolist
+set autoexpand
+
+alias ll "ls -al"
+alias lp "ls -p"
+alias h "history"
+alias hcw "history -cw"
+alias hc "history -c"
+
+

@@ -1,0 +1,167 @@
+### commands
+disable log
+
+### constants
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE=~/.zsh_history
+export EDITOR=vim
+export PATH=$PATH:$HOME/local/bin
+export PATH=$PATH:/sbin:/usr/local/bin
+export CLICOLOR=1
+#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+
+### setopt
+setopt auto_cd
+setopt auto_list
+setopt auto_menu
+setopt auto_param_keys
+setopt auto_param_slash
+setopt auto_pushd
+setopt autopushd
+#setopt beep
+setopt nobeep
+setopt brace_ccl
+setopt chase_links
+setopt complete_aliases
+setopt correct_all
+setopt extended_glob
+setopt globdots
+setopt append_history
+setopt hist_ignore_all_dups
+#setopt hist_no_store
+setopt hist_reduce_blanks
+setopt inc_append_history
+setopt extended_history
+setopt share_history
+setopt list_packed
+setopt list_types
+setopt magic_equal_subst
+setopt multios
+setopt no_clobber
+setopt noautoremoveslash
+setopt nolistbeep
+setopt path_dirs
+setopt pushd_ignore_dups
+
+### autoloads
+autoload -U promptinit && promptinit
+autoload -U colors && colors
+autoload -Uz run-help
+autoload -Uz run-help-git
+autoload -Uz run-help-svn
+autoload -Uz run-help-svk
+autoload -Uz run-help-openssl
+autoload -Uz run-help-p4
+autoload -Uz run-help-sudo
+autoload zed
+autoload predict-on
+autoload history-search-end
+autoload -Uz select-word-style && select-word-style default
+autoload -Uz zmv
+autoload -U url-quote-magic
+#autoload -U compinit && compinit
+
+### zstyle
+zstyle ':zle:*' word-chars " _-./;@"
+zstyle ':zle:*' word-style unspecified
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:history-words:*' list no
+zstyle ':completion:history-words:*' menu yes
+zstyle ':completion:history-words:*' remove-all-dups yes
+zstyle ':filter-select' max-lines $(($LINES / 2))
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
+zstyle ':completion:*:messages' format '%F{YELLOW}%d'$DEFAULT
+zstyle ':completion:*:warnings' format '%F{RED}No matches for:''%F{YELLOW} %d'$DEFAULT
+zstyle ':completion:*:descriptions' format '%F{YELLOW}completing %B%d%b'$DEFAULT
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' list-separator '-->'
+zstyle ':completion:*:manuals' separate-sections true
+
+### aliases
+alias la='ls -a'
+alias ll='ls -al'
+alias lp='ls -p'
+alias h='history 1'
+alias ha='history -i 1 -1'
+alias hc='cp /dev/null .zsh_history'
+alias pk='pkill -f'
+alias du='du -h'
+alias duh='du -h -d 1 -c'
+alias gr='grep --color=auto -ERUIn'
+alias m='make'
+alias mn='make native-code'
+alias mc='make clean'
+alias sc='screen -S main'
+alias sn='screen'
+alias sl='screen -ls'
+alias sr='screen -r main'
+alias srr='screen -U -D -RR'
+alias ta='tmux attach -t'
+alias tad='tmux attach -d -t'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias tksv='tmux kill-server'
+alias tkss='tmux kill-session -t'
+alias g='git'
+alias ga='git add'
+alias gau='git add -u'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gbd='git branch -d'
+alias gbl='git blame -b -w'
+alias gbs='git bisect'
+alias gc='git commit'
+alias gci='git commit -a'
+alias gc='git commit -v'
+alias gc!='git commit -v --amend'
+alias gca='git commit -v -a'
+alias gcam='git commit -a -m'
+alias gcsm='git commit -s -m'
+alias gcb='git checkout -b'
+alias gcf='git config --list'
+alias gcl='git clone --recursive'
+alias gclean='git clean -fd'
+alias gcm='git checkout master'
+alias gcd='git checkout develop'
+alias gcmsg='git commit -m'
+alias gco='git checkout'
+alias gcs='git commit -S'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias gf='git fetch'
+alias gl='git pull'
+alias gm='git merge'
+alias gma='git merge --abort'
+alias gp='git push'
+alias gr='git remote'
+alias grb='git rebase'
+alias grs='git restore'
+alias grv='git remote -v'
+alias gst='git status'
+alias gss='git status -s'
+alias wg='wget -vc $1'
+
+### prompt
+### colours: black, red, green, yellow, blue, magenta, cyan, white
+
+# --- prompt 1 ---
+#PROMPT='%F{red}%m%f:%~ %# '
+# --- prompt 1 ---
+
+# --- prompt 2 ---
+#PROMPT='%F{green}%n%f@%F{red}%m%f:%~ %# '
+#RPROMPT='[%F{green}%!%f][%F{yellow}%*%f]'
+# --- prompt 2 ---
+
+# --- prompt 3 ---
+PROMPT='%F{green}%n@%m%f:%2~ %# '
+RPROMPT='[%F{green}%!%f][%F{magenta}%D{%Y-%m-%f}%f|%F{yellow}%*%f]'
+# --- prompt 3 ---
+
+
+

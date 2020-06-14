@@ -1,7 +1,3 @@
-### ~/.zshrc
-### Author: David Leong
-### Updated: 22 Apr 2020
-
 ### constants
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -52,7 +48,8 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%F{yellow}%b%f'
 
 ### prompt
+### colours: black, red, green, yellow, blue, magenta, cyan, white
 PROMPT='%F{green}%m%f:%1~ '\$vcs_info_msg_0_'%# '
-#RPROMPT='[%F{cyan}%!%f][%F{magenta}%D{%Y%m%d}%f|%F{yellow}%*%f]'
-RPROMPT='[%F{cyan}%!%f][%F{yellow}%*%f]'
+#RPROMPT='[%!|%D{%Y%m%d}|%*]'
+RPROMPT='[%!|%*]'
 

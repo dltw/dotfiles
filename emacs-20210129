@@ -1,0 +1,103 @@
+;; Emacs
+
+;; init packages
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
+
+(setq package-enable-at-startup nil)
+(package-initialize) 
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile (require 'use-package))
+
+;; use packages
+(use-package csharp-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode)))
+
+;; window
+;(set-background-color "black")
+;(set-foreground-color "white")
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8-unix)
+(set-face-attribute 'default t :font "Menlo-14")
+(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(add-to-list 'default-frame-alist '(height . 80))
+(add-to-list 'default-frame-alist '(width . 120))
+(add-to-list 'default-frame-alist '(top . 0))
+(add-to-list 'default-frame-alist '(left . 180))
+(add-to-list 'default-frame-alist '(foreground-color . "#FFFFFF"))
+(add-to-list 'default-frame-alist '(background-color . "#1C1C1C"))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+;; transparency
+(set-frame-parameter nil 'alpha nil)
+(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+(add-to-list 'default-frame-alist '(alpha 85 . 50))
+
+(defun toggle-transparency ()
+   (interactive)
+   (let ((alpha (frame-parameter nil 'alpha)))
+     (set-frame-parameter
+      nil 'alpha
+      (if (eql (cond ((numberp alpha) alpha)
+                     ((numberp (cdr alpha)) (cdr alpha))
+                     ;; Also handle undocumented (<active> <inactive>) form.
+                     ((numberp (cadr alpha)) (cadr alpha)))
+               100)
+          '(85 . 50) '(100 . 100)))))
+ (global-set-key (kbd "C-c t") 'toggle-transparency)
+
+;; options
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+(setq delete-by-moving-to-trash t)
+(setq make-backup-files nil)
+(setq backup-by-copying t)
+(setq create-lockfiles nil)
+(setq auto-save-default nil)
+(setq sentence-end-double-space nil)
+(setq frame-title-format '("" "%b @ Emacs " emacs-version))
+;(setq confirm-kill-emacs 'y-or-n-p)
+(global-visual-line-mode t)
+
+;; line numbers
+(when (version<= "26.0.50" emacs-version)
+  (global-display-line-numbers-mode))
+
+;; desktop
+(desktop-save-mode) 
+(savehist-mode)
+(add-to-list 'savehist-additional-variables 'kill-ring)
+(setq desktop-path '("~/.emacs.d/cache/"))
+
+;; tab
+(electric-indent-mode)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default indent-line-function 'insert-tab)
+(setq tab-always-indent 'complete)
+(setq c-default-style "k&r"
+      c-basic-offset 4)
+
+;; delete
+(delete-selection-mode)
+(setq shift-select-mode nil)
+
+;; parenthesis
+(electric-pair-mode)
+(show-paren-mode)
+(setq show-paren-style 'parenthesis)
+
+;; KEYS
+;; auto-indent
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+;;---
+
